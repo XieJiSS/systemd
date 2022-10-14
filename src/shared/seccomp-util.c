@@ -367,6 +367,9 @@ const SyscallFilterSet syscall_filter_sets[_SYSCALL_FILTER_SET_MAX] = {
                 "sigreturn\0"
                 "time\0"
                 "ugetrlimit\0"
+#if defined __riscv && __riscv_xlen == 64 && defined(SCMP_ARCH_RISCV64)
+                "riscv_flush_icache\0"  /* Wrapper around flush_icache_mm, which flushes the instruction cache */
+#endif
         },
         [SYSCALL_FILTER_SET_AIO] = {
                 .name = "@aio",
